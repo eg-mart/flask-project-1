@@ -1,6 +1,6 @@
 import sqlalchemy
 from sqlalchemy.orm import relationship
-from db_session import SqlAlchemyBase
+from database.db_session import SqlAlchemyBase
 
 
 class Booking(SqlAlchemyBase):
