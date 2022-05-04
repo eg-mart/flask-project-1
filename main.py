@@ -3,6 +3,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user
 import os
 from database.db_session import create_session
 from database.user import User
+import locale
 
 
 app = Flask(__name__)
@@ -11,6 +12,9 @@ app.config['SECRET_KEY'] = os.urandom(16).hex()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
+locale.setlocale(locale.LC_ALL, 'en_US')
 
 
 @login_manager.user_loader
