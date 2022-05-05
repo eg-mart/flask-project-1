@@ -20,9 +20,6 @@ api.add_resource(BookingListResource, '/bookings')
 api.add_resource(BookingResource, '/bookings/<booking_id>')
 
 
-locale.setlocale(locale.LC_ALL, 'en_US')
-
-
 @login_manager.user_loader
 def load_user(user_id):
     session = create_session()
