@@ -58,14 +58,14 @@ class BookingResource(Resource):
 
 
 class BookingListResource(Resource):
-    def get():
+    def get(self):
         session = create_session()
         with session.begin():
             bookings = session.query(Booking).all()
             return jsonify({'bookings':[item.to_dict(
                 only=('user_id', 'tables', 'datetime', 'duration')) for item in bookings]})
     
-    def post():
+    def post(self):
         session = create_session()
         args = parser.parse_args()
 

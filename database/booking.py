@@ -9,7 +9,7 @@ class Booking(SqlAlchemyBase, SerializerMixin):
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
-    user_id = Column(sqlalchemy.Integer, 
+    user_id = sqlalchemy.Column(sqlalchemy.Integer, 
                      sqlalchemy.ForeignKey('users.id'))
     user = relationship("User", back_populates="bookings")
     tables = sqlalchemy.Column(sqlalchemy.String)
