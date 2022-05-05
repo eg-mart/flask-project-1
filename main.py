@@ -1,17 +1,23 @@
 from flask import Flask, redirect, render_template
+from flask_restful import Api
 from flask_login import LoginManager, login_user, login_required, logout_user
 import os
 from database.db_session import create_session
 from database.user import User
+from resources.bookings_resources import BookingResource, BookingListResource
 import locale
 
 
 app = Flask(__name__)
+api = Api(app)
 app.config['SECRET_KEY'] = os.urandom(16).hex()
 
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+api.add_resource(BookingListResource, '/bookings')
+api.add_resource(BookingResource, '/bookings/<booking_id>')
 
 
 locale.setlocale(locale.LC_ALL, 'en_US')
