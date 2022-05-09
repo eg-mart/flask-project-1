@@ -31,7 +31,7 @@ class BookingResource(Resource):
         with session.begin():
             booking = session.query(Booking).get(booking_id)
 
-            if current_user.id != booking.user_id and not current_user.is_admin:
+            if int(current_user.id) != int(booking.user_id) and not current_user.is_admin:
                 return abort(403, message='Access denied')
 
             return jsonify({'booking': booking.to_dict(
@@ -48,7 +48,7 @@ class BookingResource(Resource):
         with session.begin():
             booking = session.query(Booking).get(booking_id)
 
-            if current_user.id != booking.user_id and not current_user.is_admin:
+            if int(current_user.id) != int(booking.user_id) and not current_user.is_admin:
                 return abort(403, message='Access denied')
 
             booking.user_id = args['user_id']
@@ -63,7 +63,7 @@ class BookingResource(Resource):
         abort_if_not_found(booking_id)
         session = create_session()
 
-        if current_user.id != booking.user_id and not current_user.is_admin:
+        if int(current_user.id) != int(booking.user_id) and not current_user.is_admin:
             return abort(403, message='Access denied')
 
         with session.begin():
@@ -88,7 +88,7 @@ class BookingListResource(Resource):
         session = create_session()
         args = parser.parse_args()
 
-        if current_user.id != args['user_id'] and not current_user.is_admin:
+        if int(current_user.id) != args['user_id'] and not current_user.is_admin:
             return abort(403, message='Access denied')
 
         datetime = dt.strptime(args['datetime'], "%a, %d %b %Y %X GMT")

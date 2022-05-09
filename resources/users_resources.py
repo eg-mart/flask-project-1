@@ -19,7 +19,7 @@ parser.add_argument('phone', required=True)
 parser.add_argument('password', required=True)
 parser.add_argument('name', required=True)
 parser.add_argument('surname', required=True)
-parser.add_argument('is_admin', required=True)
+parser.add_argument('is_admin', required=True, type=bool)
 
 
 class UserResource(Resource):
@@ -27,7 +27,7 @@ class UserResource(Resource):
     def get(self, user_id):
         abort_if_not_found(user_id)
 
-        if user_id != current_user.id and not current_user.is_admin:
+        if int(user_id) != int(current_user.id) and not current_user.is_admin:
             return abort(403, message="Access denied")
 
         session = create_session()
@@ -41,7 +41,7 @@ class UserResource(Resource):
         abort_if_not_found(user_id)
         args = parser.parse_args()
 
-        if user_id != current_user.id and not current_user.is_admin:
+        if int(user_id) != int(current_user.id) and not current_user.is_admin:
             return abort(403, message="Access denied")
         if not current_user.is_admin and args['is_admin']:
             return abort(403, message="Action forbidden")
@@ -63,7 +63,7 @@ class UserResource(Resource):
     def delete(self, user_id):
         abort_if_not_found(user_id)
 
-        if user_id != current_user.id and not current_user.is_admin:
+        if int(user_id) != int(current_user.id) and not current_user.is_admin:
             return abort(403, message="Access denied")
 
         session = create_session()
