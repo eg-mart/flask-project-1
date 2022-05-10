@@ -2,3 +2,6 @@
 venv
 __pycache__/
 sqlite.db
+.idea
+static/.webassets-cache
+static/dist
