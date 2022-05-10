@@ -1,0 +1,68 @@
+@import "_mixins";
+@import "vendor/reset";
+@import "vendor/bootstrap/bootstrap";
+@import "_vars";
+
+html {
+    font-size: 62.5%;
+    background-color: #E5E5E5;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+a  {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+    
+    &:link, &:visited, &:active {
+        color: #fff;
+    }
+}
+
+hr {
+    padding: 0;
+    border: none;
+}
+
+button {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 0;
+    border: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+main {
+    flex: 1 0 auto;
+    
+    padding-top: 10rem;
+}
+
+
+
+/* Blocks */
+@import "blocks/header";
+@import "blocks/footer";

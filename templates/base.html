@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% include "partials/head.html" %}
+    {% assets "css_all" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+</head>
+<body>
+    <div class="wrapper">
+        {% include "partials/header.html" %}
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        {% include "partials/footer.html" %}
+    </div>
+
+    {% assets "js_all" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+</body>
+</html>

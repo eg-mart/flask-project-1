@@ -1,9 +1,13 @@
 from flask import Flask, redirect, render_template
 from flask_restful import Api
 from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_assets import Environment, Bundle
 import os
+import shutil
 from database.db_session import create_session
 from database.user import User
+from resources.bookings_resources import BookingResource, BookingListResource
+import locale
 from resources.routes import init_routes
 from resources.jwt_init import init_jwt
 
@@ -12,6 +16,27 @@ api = Api(app)
 app.config['SECRET_KEY'] = os.urandom(16).hex()
 app.config["JWT_SECRET_KEY"] = os.urandom(16).hex()
 
+assets = Environment(app)
+
+try:
+    shutil.rmtree('static/.webassets-cache')
+    shutil.rmtree('static/dist')
+except Exception as e:
+    pass
+
+bundles = {
+    'js_all': Bundle(Bundle('assets/js/app.js', filters='jsmin'),
+                     'assets/js/vendor/bootstrap/bootstrap.bundle.min.js',
+                     output='dist/assets/js/app.js'),
+
+    'css_all': Bundle('assets/scss/style.scss', filters='libsass,cssmin',
+                      output='dist/assets/css/scss.css'),
+}
+assets.register(bundles)
+
+# sass =
+# all_css = Bundle(sass, filters='cssmin', output="dist/assets/css/style.css")
+# assets.register('css_all', all_css)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -48,7 +73,7 @@ def logout():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', title="Тайм-кафе Loft | Антикафе Саратов")
 
 
 @app.route('/about')
