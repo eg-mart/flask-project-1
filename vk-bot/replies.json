@@ -3,7 +3,20 @@
     "attachments_dir": "vk-bot/img",
     "greeting":{
         "message": "Привет!",
-        "keyboard": "",
+        "keyboard": {
+            "one_time": false,
+            "buttons": [[
+                {
+                    "action":{
+                       "type":"text",
+                       "payload":"{\"button\": \"2\"}",
+                       "label":"Забронировать столик"
+                    },
+                    "color":"positive"
+                }
+            ]],
+            "inline":false
+        },
         "attachments": ["test.jpg"]
    },
    "error":{

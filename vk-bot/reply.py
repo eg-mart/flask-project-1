@@ -38,6 +38,6 @@ def send_answer(user_id, step=-1):
     vk = get_session().get_api()
     vk.messages.send(user_id=user_id,
                      message=answer['message'],
-                     keyboard=answer['keyboard'],
+                     keyboard=json.dumps(answer['keyboard']),
                      attachment=answer['attachments'],
                      random_id=random.randint(0, 2 ** 64))
