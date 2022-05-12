@@ -1,0 +1,14 @@
+{
+    "order": ["greeting"],
+    "attachments_dir": "vk-bot/img",
+    "greeting":{
+        "message": "Привет!",
+        "keyboard": "",
+        "attachments": ["test.jpg"]
+   },
+   "error":{
+       "message": "Простите, я не понимаю Вас.",
+       "keyboard": "",
+        "attachments": []
+   }
+}
