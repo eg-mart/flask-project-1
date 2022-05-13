@@ -16,9 +16,10 @@
         font-family: "Lato";
     }
 
-    p > label, span {
+    label, span {
         font-size: 3.2rem;
         margin-bottom: 1rem;
+        color: $primary;
     }
 
     input.form-control {
