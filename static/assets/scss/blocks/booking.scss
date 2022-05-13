@@ -1,0 +1,148 @@
+.booking-div {
+    margin-top: 4rem;
+    background-color: $secondary;
+    padding: 3.5rem;
+    box-shadow: 2rem 2rem 0 rgba($secondary, 0.5);
+
+    .booking-title {
+        font-family: "Phenomena";
+        font-weight: bold;
+        font-size: 6.4rem;
+    }
+}
+
+.booking-form {
+    p, span {
+        font-family: "Lato";
+    }
+
+    p > label, span {
+        font-size: 3.2rem;
+        margin-bottom: 1rem;
+    }
+
+    input.form-control {
+        border: none;
+        background: none;
+        border-bottom: solid 0.3rem $dark;
+        color: #fff;
+        border-radius: 0;
+        font-size: 2.6rem;
+        transition: all linear 0.2s;
+        background-color: none;
+
+        &:focus {
+            border-bottom: solid 0.3rem $primary;
+            box-shadow: none;
+        }
+    }
+
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        display: none;
+        -webkit-appearance: none;
+    }
+
+    input[type="submit"] {
+        font-size: 3.2rem;
+        padding-right: 2rem;
+        padding-left: 2rem;
+        border-radius: 0;
+    }
+}
+
+.tables-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 3rem;
+
+    .table-item {
+        width: auto;
+        font-size: 2.5rem;
+        color: $primary;
+
+
+        input {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+
+            &+label {
+                display: inline-flex;
+                align-items: center;
+                user-select: none;
+                cursor: pointer;
+
+                &::before {
+                    content: '';
+                    display: inline-block;
+                    width: 1em;
+                    height: 1em;
+                    flex-shrink: 0;
+                    flex-grow: 0;
+                    border: 1px solid #fff;
+                    margin-right: 0.5em;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-size: 50% 50%;
+                }
+            }
+
+            &:checked+label::before {
+                border-color: $primary;
+                background-color: $primary;
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+            }
+        }
+    }
+}
+
+.time-indicator {
+    height: 85px;
+    width: 576px;
+    background-image: url("../../../assets/img/timebar.png");
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2rem;
+}
+
+.occupied-time {
+    height: 62px;
+    background-color: #B02B2B;
+    position: absolute;
+}
+
+.timers {
+    width: 20rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    color: $primary;
+
+    font-family: "Lato";
+    font-size: 3.2rem;
+
+    #start_time, #end_time {
+        width: 6rem;
+        
+        border: none;
+        background: none;
+        border-bottom: solid 0.3rem $dark;
+        color: #fff;
+        border-radius: 0;
+        font-size: 2.6rem;
+        transition: all linear 0.2s;
+        background-color: none;
+
+        &:focus {
+            border-bottom: solid 0.3rem $primary;
+            box-shadow: none;
+        }
+    }
+}

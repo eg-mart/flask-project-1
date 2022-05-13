@@ -1,42 +1,51 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Авторизация</h1>
-    <form action="" method="post">
+<div class="booking-div cnt-center--mg">
+    <p class="booking-title title-shadow">Бронирование</p>
+    <form class="booking-form" action="" method="post">
         {{ form.hidden_tag() }}
-        <p>
-            {{ form.date.label }}<br>
-            {{ form.date(class="form-control", type="date") }}<br>
-            {% for error in form.date.errors %}
+
+        {{ form.date.label }}<br>
+        {{ form.date(class="form-control", type="date") }}<br>
+        {% for error in form.date.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endfor %}
+
+        <p>{{ form.tables.label }}</p>
+        <div class="tables-container">
+            {% for subfield in form.tables %}
+            <div class="table-item">
+                {{ subfield(onchange="time_generator()") }}
+                {{ subfield.label }}
+            </div>
+            {% endfor %}
+            {% for error in form.tables.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{ error }}
                 </div>
             {% endfor %}
-        </p>
-        <p>
-                {{ form.tables.label }}<br>
-                {% for subfield in form.tables %}
-                    <div>
-                        {{ subfield(onchange="time_generator()") }}
-                        {{ subfield.label }}
-                    </div>
-                {% endfor %}
-                {% for error in form.tables.errors %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </div>
-                {% endfor %}
-        </p>
-        <p>
-            <div class="time-indicator" id="bar"></div><br>
-            {{ form.start_time(size=30) }} - {{ form.end_time(size=30) }}<br>
-            {% for error in form.start_time.errors %}
-                <div class="alert alert-danger" role="alert">
-                    {{ error }}
-                </div>
-            {% endfor %}
-        </p>
+        </div>
+
+        <div class="time-indicator" id="bar"></div>
+
+        <div class="timers">
+            {{ form.start_time(size=30) }}
+            <span>—</span>
+            {{ form.end_time(size=30) }}
+        </div>
+
+        {% for error in form.start_time.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endfor %}
+
         <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
         <div>{{ message }}</div>
     </form>
+</div>
+
 {% endblock %}
