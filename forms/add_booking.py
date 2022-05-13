@@ -8,7 +8,7 @@ import re
 class BookingForm(FlaskForm):
     tables = SelectMultipleField('Столики', choices=[i for i in range(1, 7)], coerce=int,
                                  option_widget=widgets.CheckboxInput())
-    date = DateField('Дата брони', format='%d.%m.%Y', validators=[DataRequired()])
+    date = DateField('Дата брони')
     start_time = IntegerField(validators=[DataRequired(), NumberRange(0, 23)])
     end_time = IntegerField(validators=[DataRequired(), NumberRange(0, 23)])
     submit = SubmitField('Забронировать')
