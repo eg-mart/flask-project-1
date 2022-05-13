@@ -176,6 +176,13 @@ main {
     filter: drop-shadow(4px 4px 4px rgba($primary, 0.25));
 }
 
+.message {
+    font-family: "Lato";
+    font-size: 3.2rem;
+    margin-bottom: 1rem;
+    color: $danger;
+}
+
 /* Blocks */
 @import "blocks/header";
 @import "blocks/footer";
