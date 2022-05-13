@@ -58,7 +58,7 @@ def load_user(user_id):
     return user
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
 
@@ -78,7 +78,7 @@ def login():
     return render_template('login.html', form=form, title='Авторизация')
 
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
 
