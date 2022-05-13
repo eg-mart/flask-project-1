@@ -70,7 +70,7 @@ def main():
                     "phone": phone,
                     "password": text,
                 }
-                r = requests.post('http://10.0.0.100:5000/api/v1/login', json=data)
+                r = requests.post('https://flask-project-loft.herokuapp.com/api/v1/login', json=data)
 
                 if r.status_code == 200:
                     api_session = requests.Session()
@@ -87,10 +87,10 @@ def main():
                     "surname": user_data[0]["last_name"],
                     "is_admin": False
                 }
-                r = requests.post('http://10.0.0.100:5000/api/v1/users', json=data)
+                r = requests.post('https://flask-project-loft.herokuapp.com/api/v1/users', json=data)
 
                 if r.status_code == 200:
-                    r = requests.post('http://10.0.0.100:5000/api/v1/login', json=data)
+                    r = requests.post('https://flask-project-loft.herokuapp.com/api/v1/login', json=data)
                     api_session = requests.Session()
                     token = r.json()["access_token"]
                     api_session.headers["Authorization"] = f"Bearer {token}"
@@ -120,7 +120,7 @@ def main():
                     send_answer(user)
                     continue
                 date_str = book_date.strftime('%Y-%m-%d')
-                r = api_session.post('http://10.0.0.100:5000/api/v1/occupied-time', json={"date": date_str})
+                r = api_session.post('https://flask-project-loft.herokuapp.com/api/v1/occupied-time', json={"date": date_str})
                 occupied_time = r.json()['occupied_time']
                 generate_image(occupied_time)
                 send_answer(user, step)
@@ -143,7 +143,7 @@ def main():
             
             elif step == 7:
                 if text.lower() == 'да':
-                    r = api_session.post('http://10.0.0.100:5000/api/v1/bookings', json=booking)
+                    r = api_session.post('https://flask-project-loft.herokuapp.com/api/v1/bookings', json=booking)
                     if r.status_code == 200:
                         send_answer(user, step)
                     else:
