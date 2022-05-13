@@ -1,9 +1,12 @@
 from flask_restful import reqparse, abort, Resource
 from database.db_session import create_session
 from database.booking import Booking
+from database.user import User
 from flask import jsonify
 from datetime import datetime as dt
+from datetime import date
 from flask_jwt_extended import jwt_required, current_user
+from sqlalchemy import func
 
 
 def abort_if_not_found(booking_id):
@@ -19,7 +22,7 @@ parser = reqparse.RequestParser()
 parser.add_argument('tables', required=True)
 parser.add_argument('datetime', required=True)
 parser.add_argument('duration', required=True, type=int)
-parser.add_argument('user_id', required=True, type=int)
+parser.add_argument('user_phone', required=True)
 
 
 class BookingResource(Resource):
@@ -43,7 +46,7 @@ class BookingResource(Resource):
         args = parser.parse_args()
         session = create_session()
 
-        datetime = dt.strptime(args['datetime'], "%a, %d %b %Y %X GMT")
+        datetime = dt.strptime(args['datetime'], "%Y-%m-%d %H:%M:%S")
 
         with session.begin():
             booking = session.query(Booking).get(booking_id)
@@ -51,7 +54,8 @@ class BookingResource(Resource):
             if int(current_user.id) != int(booking.user_id) and not current_user.is_admin:
                 return abort(403, message='Access denied')
 
-            booking.user_id = args['user_id']
+            user = session.query(User).filter(User.phone == args['user_phone']).one().id
+            booking.user_id = user
             booking.duration = args['duration']
             booking.tables = args['tables']
             booking.datetime = datetime
@@ -84,18 +88,22 @@ class BookingListResource(Resource):
             return jsonify({'bookings':[item.to_dict(
                 only=('user_id', 'tables', 'datetime', 'duration')) for item in bookings]})
     
+    @jwt_required()
     def post(self):
         session = create_session()
         args = parser.parse_args()
 
-        if int(current_user.id) != args['user_id'] and not current_user.is_admin:
+        with session.begin():
+            user = session.query(User).filter(User.phone == args['user_phone']).one().id
+
+        if int(current_user.id) != user and not current_user.is_admin:
             return abort(403, message='Access denied')
 
-        datetime = dt.strptime(args['datetime'], "%a, %d %b %Y %X GMT")
+        datetime = dt.strptime(args['datetime'], "%Y-%m-%d %H:%M:%S")
 
         with session.begin():
             booking = Booking(
-                user_id=args['user_id'],
+                user_id=user,
                 duration=args['duration'],
                 datetime=datetime,
                 tables=args['tables']
@@ -103,3 +111,22 @@ class BookingListResource(Resource):
             session.add(booking)
 
         return jsonify({'success': 'OK'})
+
+
+date_parser = reqparse.RequestParser()
+date_parser.add_argument('date', required=True)
+
+
+class OccupiedTimeResource(Resource):
+    def post(self):
+        session = create_session()
+        args = date_parser.parse_args()
+        with session.begin():
+            d = dt.strptime(args["date"], "%Y-%m-%d").date()
+            bookings = session.query(Booking).filter(func.date(Booking.datetime) == d).all()
+            occupied_time = []
+            for booking in bookings:
+                start = booking.datetime.hour
+                end = int(start + booking.duration / 60)
+                occupied_time.append([start, end])
+        return jsonify({"occupied_time": occupied_time})
