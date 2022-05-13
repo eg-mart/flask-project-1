@@ -69,7 +69,7 @@ def login():
 
             if user and user.check_password(form.password.data):
                 login_user(user, remember=form.remember_me.data)
-                return redirect('/')
+                return redirect('/add_booking')
 
             return render_template('login.html',
                                    message='Неправильный логин или пароль',
@@ -134,8 +134,8 @@ def contacts():
 def news():
     return render_template('news.html')
 
-@login_required
 @app.route('/add_booking', methods=['GET', 'POST'])
+@login_required
 def add_booking():
     form = BookingForm()
 
