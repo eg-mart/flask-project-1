@@ -1,5 +1,77 @@
 header {
     position: fixed;
     width: 100%;
-    height: 10rem;
+    height: 12rem;
+    background-color: $secondary;
+    border-bottom: $primary solid 0.3rem;
+    padding-left: 15.625vw;
+    padding-right: 15.625vw;
+    z-index: 99999;
+
+    .header-container {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo-div {
+            .logo-img {
+                width: 9rem;
+                display: block;
+                float: left;
+                margin-right: 2rem;
+                border: 0.3rem solid #fff;
+                border-radius: 50%;
+                transition: transform ease 0.2s;
+            }
+
+            &:hover .logo-img {
+                transform: scale(1.1);
+            }
+        }
+        
+
+        nav {
+            width: 94rem;
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            .nav-link {
+                font-family: Phenomena;
+                font-size: 6rem;
+            }
+        }
+
+        .login-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 20rem;
+            height: 7.7rem;
+            background-color: $secondary;
+
+            border: $primary solid 0.3rem;
+
+            padding-left: 0.8rem;
+            padding-right: 0.8rem;
+
+            padding-top: 1.1rem;
+            padding-bottom: 1.1rem;
+
+            .sign-in {
+                height: 100%;
+            }
+
+            .login-text {
+                color: #fff;
+
+                font-family: Phenomena;
+                font-size: 5.6rem;
+            }
+        }
+    }
 }
