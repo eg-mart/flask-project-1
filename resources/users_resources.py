@@ -94,6 +94,10 @@ class UserListResource(Resource):
             return abort(403, message='Action forbidden')
 
         with session.begin():
+            users_by_phone = session.query(User).filter(User.phone == args['phone']).all()
+            if len(users_by_phone) > 0:
+                return abort(409, message='Account already exists')
+
             user = User(
                 phone=args['phone'],
                 surname=args['surname'],

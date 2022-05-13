@@ -35,6 +35,19 @@ hr {
     border: none;
 }
 
+.time-indicator {
+    height: 24px;
+    width: 500px;
+    background-color: #E5E5E5;
+    position: absolute;
+}
+
+.occupied-time {
+    height: 24px;
+    background-color: #B02B2B;
+    position: absolute;
+}
+
 button {
     border: none;
     text-align: center;

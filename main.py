@@ -6,10 +6,9 @@ import os
 import shutil
 from database.db_session import create_session
 from database.user import User
-from resources.bookings_resources import BookingResource, BookingListResource
-import locale
 from resources.routes import init_routes
 from resources.jwt_init import init_jwt
+from forms.login import LoginForm
 
 app = Flask(__name__)
 api = Api(app)
@@ -56,7 +55,22 @@ def load_user(user_id):
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        session = create_session()
+        with session.begin():
+            user = session.query(User).filter(User.phone == form.phone.data).first()
+
+            if user and user.check_password(form.password.data):
+                login_user(user, remember=form.remember_me.data)
+                return redirect('/')
+
+            return render_template('login.html',
+                                   message='Неправильный логин или пароль',
+                                   form=form, title='Авторизация')
+
+    return render_template('login.html', form=form, title='Авторизация')
 
 
 @app.route('/register')
@@ -89,6 +103,10 @@ def contacts():
 @app.route('/news')
 def news():
     return render_template('news.html')
+
+@app.route('/add_booking')
+def add_booking():
+    return render_template('add_booking.html')
 
 
 if __name__ == '__main__':
