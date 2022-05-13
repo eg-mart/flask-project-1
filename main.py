@@ -10,6 +10,7 @@ from resources.routes import init_routes
 from resources.jwt_init import init_jwt
 from forms.login import LoginForm
 from forms.add_booking import BookingForm
+from forms.register import RegisterForm
 
 app = Flask(__name__)
 api = Api(app)
@@ -76,7 +77,31 @@ def login():
 
 @app.route('/register')
 def register():
-    return render_template('register.html')
+    form = RegisterForm()
+
+    if form.validate_on_submit():
+        if form.password != form.password_again:
+            render_template('register.html', message='Пароли не совпадают',
+                            title='Регистрация', form=form)
+
+        session = create_session()
+
+        with session.begin():
+            if session.query(User).filter(User.phone == form.phone.data).first():
+                return render_template('register.html',
+                                       message='Такой пользователь уже зарегистрирован',
+                                       title='Регистрация', form=form)
+
+            user = User(
+                name=form.name.data,
+                surname=form.surname.data,
+                phone=form.phone.data
+            )
+            user.set_password(form.password.data)
+            session.add(user)
+            return redirect('/login')
+
+    return render_template('register.html', form=form, title='Регистрация')
 
 
 @app.route('/logout')
