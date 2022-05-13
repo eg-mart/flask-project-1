@@ -4,15 +4,22 @@
             <nav class="nav">
                 <div class="nav-item logo-div"><a href="/index" class="nav-link">
                     <img class="logo-img" src="static/assets/img/loft.png" alt="">
-                    Главаная</a></div>
-                <div class="nav-item"><a href="" class="nav-link">Новости</a></div>
-                <div class="nav-item"><a href="" class="nav-link">О нас</a></div>
-                <div class="nav-item"><a href="" class="nav-link">Контакты</a></div>
+                    Главная</a></div>
+                <div class="nav-item"><a href="https://vk.com/loft_cafe64" class="nav-link">Новости</a></div>
+                <div class="nav-item"><a href="https://vk.com/loft_cafe64" class="nav-link">О нас</a></div>
+                <div class="nav-item"><a href="/add_booking" class="nav-link">Бронировать</a></div>
             </nav>
+            {% if current_user.is_authenticated %}
+            <button class="login-btn" onclick="location.href='/logout'">
+                <img src="static/assets/img/sign-in.svg" alt="" class="sign-in">
+                <p class="login-text">Выйти</p>
+            </button>
+            {% else %}
             <button class="login-btn" onclick="location.href='/login'">
                 <img src="static/assets/img/sign-in.svg" alt="" class="sign-in">
                 <p class="login-text">Войти</p>
             </button>
+            {% endif %}
         </div>
     </header>
 {% endblock %}

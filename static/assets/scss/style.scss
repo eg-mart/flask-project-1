@@ -183,6 +183,10 @@ main {
     color: $danger;
 }
 
+.alert {
+    padding: 2rem;
+}
+
 /* Blocks */
 @import "blocks/header";
 @import "blocks/footer";
