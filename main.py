@@ -9,6 +9,7 @@ from database.user import User
 from resources.routes import init_routes
 from resources.jwt_init import init_jwt
 from forms.login import LoginForm
+from forms.add_booking import BookingForm
 
 app = Flask(__name__)
 api = Api(app)
@@ -105,9 +106,10 @@ def contacts():
 def news():
     return render_template('news.html')
 
-@app.route('/add_booking')
+@app.route('/add_booking', methods=['GET', 'POST'])
 def add_booking():
-    return render_template('add_booking.html')
+    form = BookingForm()
+    return render_template('add_booking.html', form=form)
 
 
 if __name__ == '__main__':
