@@ -1,16 +1,19 @@
 from flask import Flask, redirect, render_template
 from flask_restful import Api
-from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_assets import Environment, Bundle
 import os
 import shutil
 from database.db_session import create_session
 from database.user import User
+from database.booking import Booking
 from resources.routes import init_routes
 from resources.jwt_init import init_jwt
 from forms.login import LoginForm
 from forms.add_booking import BookingForm
 from forms.register import RegisterForm
+from datetime import datetime as dt
+from datetime import time, date
 
 app = Flask(__name__)
 api = Api(app)
@@ -131,9 +134,25 @@ def contacts():
 def news():
     return render_template('news.html')
 
+@login_required
 @app.route('/add_booking', methods=['GET', 'POST'])
 def add_booking():
     form = BookingForm()
+
+    if form.validate_on_submit():
+        session = create_session()
+        with session.begin():
+            start = time(form.start_time.data, 0, 0)
+            d = date(form.date.data)
+            booking = Booking(
+                user_id = current_user.id,
+                datetime = dt.combine(d, start),
+                duration = (form.end_time.data - form.start_time.data) * 60,
+                tables = form.tables.data
+            )
+            session.add(booking)
+            return redirect('/')
+            
     return render_template('add_booking.html', form=form)
 
 
