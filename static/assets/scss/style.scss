@@ -110,7 +110,7 @@ p {
 a  {
     text-decoration: none;
 
-    &:hover {
+    &:hover  {
         text-decoration: underline;
         color: lighten($primary, 5%) !important;
     }
@@ -134,6 +134,17 @@ button {
     border: none;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: inset 0 0 0 50000px $secondary;
+}
+
+input:-webkit-autofill{
+    -webkit-text-fill-color: #fff !important;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -151,11 +162,24 @@ main {
     padding-top: 12rem;
 }
 
+.cnt-center--pd {
+    padding-left: 15.625vw;
+    padding-right: 15.625vw;
+}
 
+.cnt-center--mg {
+    margin-left: 15.625vw;
+    margin-right: 15.625vw;
+}
+
+.title-shadow {
+    filter: drop-shadow(4px 4px 4px rgba($primary, 0.25));
+}
 
 /* Blocks */
 @import "blocks/header";
 @import "blocks/footer";
+@import "blocks/carousel";
 @import "blocks/info_bar";
 @import "blocks/slogan";
 @import "blocks/login";
