@@ -1,26 +1,104 @@
 {
-    "order": ["greeting"],
+    "order": ["greeting", "start_booking", "password", "tables", "date", "time", "confirmation", "success"],
     "attachments_dir": "vk-bot/img",
+
     "greeting":{
-        "message": "Привет!",
+        "message": "Вас приветствует бот кафе Лофт! Если хотите забронировать столик, нажмите кнопку или напишите мне \"забронировать\" - и я Вам помогу.",
         "keyboard": {
             "one_time": false,
             "buttons": [[
                 {
                     "action":{
                        "type":"text",
-                       "payload":"{\"button\": \"2\"}",
-                       "label":"Забронировать столик"
+                       "payload":"{\"button\": \"1\"}",
+                       "label":"Забронировать"
                     },
                     "color":"positive"
                 }
             ]],
             "inline":false
         },
-        "attachments": ["test.jpg"]
+        "attachments": []
    },
+
+   "start_booking":{
+       "message": "Введите, пожалуйста, свой номер телефона, чтобы мы могли связаться с Вами, если возникнут дополнительные вопросы.",
+       "keyboard": {
+        "one_time": false,
+        "buttons": [[
+            {
+                "action":{
+                   "type":"text",
+                   "payload":"{\"button\": \"3\"}",
+                   "label":"Отменить бронирование"
+                },
+                "color":"negative"
+            }
+        ]],
+        "inline":false
+    },
+       "attachments": []
+   },
+
+   "password":{
+       "message": "Введите пароль от Вашего аккаунта на нашем сайте, или придумайте новый пароль, если у Вас нет аккаунта. Это необходимо для успешного добавления Вашей брони в нашу систему.",
+       "keyboard": {},
+       "attachments": []
+   },
+
+   "tables":{
+       "message": "Теперь выберите столики, которые хотите забронировать, и отправьте их номера (согласно схеме) через запятую.",
+       "keyboard": {},
+       "attachments": ["tables_scheme.png"]
+   },
+
+   "date":{
+       "message": "Отправьте дату, на которую хотите произвести бронь, в формате день.месяц.год",
+       "keyboard": {},
+       "attachments": []
+   },
+
+   "time":{
+       "message": "На картинке показано, какое время в выбранный Вами день свободно. Выберите, пожалуйста, свободные часы, которые Вам подходят, и отправьте сообщение в формате час начала-час конца (без минут).",
+       "keyboard": {},
+       "attachments": ["time.png"]
+   },
+
+   "confirmation":{
+       "message": "Ваша бронь успешно сформирована. Подтверждаете бронирование?",
+       "keyboard": {
+        "one_time": true,
+        "buttons": [[
+            {
+                "action":{
+                   "type":"text",
+                   "payload":"{\"button\": \"2\"}",
+                   "label":"Да"
+                },
+                "color":"positive"
+            },
+            {
+                "action":{
+                   "type":"text",
+                   "payload":"{\"button\": \"3\"}",
+                   "label":"Нет"
+                },
+                "color":"negative"
+            }
+        ]],
+        "inline":false
+    },
+       "attachments": []
+   },
+
+   "success":{
+       "message": "Столики успешно забронированы!",
+       "keyboard": {},
+       "attachments": []
+   },
+
    "error":{
-       "message": "Простите, я не понимаю Вас.",
+       "message": "Произошла ошибка - данные были введены неверно.",
        "keyboard": "",
         "attachments": []
    }
