@@ -125,20 +125,6 @@ hr {
     border: none;
 }
 
-.time-indicator {
-    left: 50%;
-    height: 85px;
-    width: 576px;
-    background-image: url("../../../assets/img/timebar.png");
-    position: absolute;
-}
-
-.occupied-time {
-    height: 62px;
-    background-color: #B02B2B;
-    position: absolute;
-}
-
 button {
     border: none;
     text-align: center;
@@ -172,3 +158,5 @@ main {
 @import "blocks/footer";
 @import "blocks/info_bar";
 @import "blocks/slogan";
+@import "blocks/login";
+@import "blocks/booking";
