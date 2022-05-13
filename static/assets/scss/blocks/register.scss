@@ -1,0 +1,42 @@
+.register-div {
+	margin-top: 4rem;
+    background-color: $secondary;
+    padding: 3.5rem;
+    box-shadow: 2rem 2rem 0 rgba($secondary, 0.5);
+    font-size: 3.2rem;
+
+    .register-title {
+    	font-family: "Phenomena";
+        font-weight: bold;
+        font-size: 6.4rem;
+    }
+}
+
+.register-form {
+	label {
+		color: $primary;
+	}
+
+	input.form-control {
+        border: none;
+        background: none;
+        border-bottom: solid 0.3rem $dark;
+        color: #fff;
+        border-radius: 0;
+        font-size: 2.6rem;
+        transition: all linear 0.2s;
+        background-color: none;
+
+        &:focus {
+            border-bottom: solid 0.3rem $primary;
+            box-shadow: none;
+        }
+    }
+
+    input[type="submit"] {
+		font-size: 3.2rem;
+	    padding-right: 2rem;
+	    padding-left: 2rem;
+	    border-radius: 0;
+	}
+}
