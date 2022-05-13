@@ -8,11 +8,13 @@ from database.db_session import create_session
 from database.user import User
 from resources.bookings_resources import BookingResource, BookingListResource
 import locale
-from webassets.filter import get_filter
+from resources.routes import init_routes
+from resources.jwt_init import init_jwt
 
 app = Flask(__name__)
 api = Api(app)
 app.config['SECRET_KEY'] = os.urandom(16).hex()
+app.config["JWT_SECRET_KEY"] = os.urandom(16).hex()
 
 assets = Environment(app)
 
@@ -39,8 +41,8 @@ assets.register(bundles)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-api.add_resource(BookingListResource, '/bookings')
-api.add_resource(BookingResource, '/bookings/<booking_id>')
+init_jwt(app)
+init_routes(api)
 
 
 @login_manager.user_loader
