@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-    <p class="h1 text-primary">Привет!</p>
-
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -27,5 +25,31 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
+  </div>
+
+  <div class="info-bar">
+    <div class="info-item">
+      <img src="static/assets/img/place.svg" alt="" class="info-icon">
+      <p class="info-title">Адрес</p>
+      <p class="info-text">ул. Степана Разина,<br>54, Саратов</p>
+    </div>
+    <div class="info-item">
+      <img src="static/assets/img/telephon.svg" alt="" class="info-icon">
+      <p class="info-title">Телефон</p>
+      <p class="info-text">+7 (937) 818-14-32</p></div>
+    <div class="info-item">
+      <img src="static/assets/img/clock.svg" alt="" class="info-icon">
+      <p class="info-title">Время работы</p>
+      <p class="info-text">Круглосуточно</p></div>
+    <div class="info-item">
+      <img src="static/assets/img/gamepad.svg" alt="" class="info-icon">
+      <p class="info-title">Игры</p>
+      <p class="info-text">Настольные, xbox, ps<br>и не только...</p></div>
+  </div>
+
+  <div class="slogan">
+    <p class="slogan-text"><span>Loft</span> - это классическое тайм-кафе. Это зона, свободная от табака и алкоголя. Мы не продаем еду и напитки за деньги, мы сосредоточены на том, как сделать времяпрепровождение наших Гостей более комфортным.</p>
+    <div class="corner corner-top"></div>
+    <div class="corner corner-bottom"></div>
   </div>
 {% endblock %}

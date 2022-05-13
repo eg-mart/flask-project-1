@@ -1,11 +1,95 @@
 @import "_mixins";
 @import "vendor/reset";
-@import "vendor/bootstrap/bootstrap";
 @import "_vars";
+@import "vendor/bootstrap/bootstrap";
 
+/* Fonts */
+@font-face {
+    font-family: "Phenomena";
+    src: url("../../../assets/fonts/Phenomena/Phenomena-Thin.ttf");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "Phenomena";
+    src: url("../../../assets/fonts/Phenomena/Phenomena-ExtraLight.ttf");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "Phenomena";
+    src: url("../../../assets/fonts/Phenomena/Phenomena-Light.ttf");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Phenomena";
+    src: url("../../../assets/fonts/Phenomena/Phenomena-Regular.ttf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Phenomena";
+    src: url("../../../assets/fonts/Phenomena/Phenomena-Bold.ttf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Phenomena";
+    src: url("../../../assets/fonts/Phenomena/Phenomena-ExtraBold.ttf");
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: "Phenomena";
+    src: url("../../../assets/fonts/Phenomena/Phenomena-Black.ttf");
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("../../../assets/fonts/Lato/Lato-Hairline.ttf");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("../../../assets/fonts/Lato/Lato-HairlineItalic.ttf");
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("../../../assets/fonts/Lato/Lato-Light.ttf");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("../../../assets/fonts/Lato/Lato-LightItalic.ttf");
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("../../../assets/fonts/Lato/Lato-Regular.ttf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("../../../assets/fonts/Lato/Lato-Italic.ttf");
+    font-weight: 400;
+    font-style: italic;
+}
+
+
+
+/* Styles */
 html {
     font-size: 62.5%;
-    background-color: #E5E5E5;
 }
 
 *,
@@ -16,6 +100,11 @@ html {
 
 html, body {
     height: 100%;
+    background-color: $dark;
+}
+
+p {
+    color: $primary;
 }
 
 a  {
@@ -23,10 +112,11 @@ a  {
 
     &:hover {
         text-decoration: underline;
+        color: lighten($primary, 5%) !important;
     }
     
     &:link, &:visited, &:active {
-        color: #fff;
+
     }
 }
 
@@ -71,7 +161,7 @@ img {
 main {
     flex: 1 0 auto;
     
-    padding-top: 10rem;
+    padding-top: 12rem;
 }
 
 
@@ -79,3 +169,5 @@ main {
 /* Blocks */
 @import "blocks/header";
 @import "blocks/footer";
+@import "blocks/info_bar";
+@import "blocks/slogan";
