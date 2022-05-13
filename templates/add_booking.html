@@ -7,7 +7,7 @@
         {{ form.hidden_tag() }}
 
         {{ form.date.label }}<br>
-        {{ form.date(class="form-control", type="date") }}<br>
+        {{ form.date(class="form-control", type="date", id="date-input") }}<br>
         {% for error in form.date.errors %}
             <div class="alert alert-danger" role="alert">
                 {{ error }}
