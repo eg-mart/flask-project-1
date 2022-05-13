@@ -148,10 +148,10 @@ def add_booking():
                 user_id = current_user.id,
                 datetime = dt.combine(d, start),
                 duration = (form.end_time.data - form.start_time.data) * 60,
-                tables = form.tables.data
+                tables = str(form.tables.data)
             )
             session.add(booking)
-            return redirect('/')
+            return redirect('/add_booking')
             
     return render_template('add_booking.html', form=form)
 
