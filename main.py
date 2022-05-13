@@ -144,9 +144,6 @@ def add_booking():
         with session.begin():
             start = time(form.start_time.data, 0, 0)
             d = form.date.data
-            d.hour = form.start_time.data
-            d.minute = 0
-            d.second = 0
             booking = Booking(
                 user_id = current_user.id,
                 datetime = dt.combine(d, start),
